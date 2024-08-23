@@ -1,0 +1,27 @@
+﻿name: Build Binaries
+
+on:
+  push:
+    paths-ignore:
+      - '.github/*'
+      - '*.md'
+  pull_request:
+    paths-ignore:
+      - '.github/*'
+      - '*.md'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: microsoft/setup-msbuild@v2
+      with:
+        vs-prerelease: true
+
+    - name: Clear local NuGet cache
+      run: dotnet nuget locals all --clear
+
+    - name: Build
+      run: msbuild Samples/Win7Samples/begin/LearnWin32/Direct2DCircle/cpp/Direct2DCircle.sln
