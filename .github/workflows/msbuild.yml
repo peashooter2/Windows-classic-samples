@@ -25,3 +25,8 @@ jobs:
 
     - name: Build
       run: msbuild Samples/Win7Samples/begin/LearnWin32/Direct2DCircle/cpp/Direct2DCircle.sln
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: smaple
+        path: Output\Binaries
